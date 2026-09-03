@@ -10,4 +10,4 @@ It does not manage, mirror, or back up the agent application's source code. Appl
 
 ## Consumer contract
 
-A consumer repository tracks declarative configuration and reusable skills, while excluding agent application source code, machine-local secrets, and runtime state. Changes to this library are delivered here first through a reviewed merge; consumers then update only their submodule gitlink.
+A consumer repository tracks declarative configuration and reusable skills, while excluding agent application source code, machine-local secrets, and chat-specific or runtime state such as databases and session files. Changes to this library are delivered here first through a reviewed merge; consumers then update only their submodule gitlink.
