@@ -1,7 +1,7 @@
 ---
 name: agent-repository-management
 description: "Use when backing up an agent's configuration and reusable skills."
-version: 1.2.0
+version: 1.3.0
 author: Hermes Agent
 license: MIT
 metadata:
@@ -22,14 +22,16 @@ This repository type backs up the agent's configuration, not the agent applicati
 - Do not track, mirror, vendor, or submodule the installed agent application source. That source remains in its upstream product repository and is maintained through its own development workflow.
 - Do not treat a configuration backup as a deployable copy of the agent application. It restores operator-owned configuration after the agent application is installed separately.
 - Keep machine-local secrets, chat-specific data, and mutable runtime state outside version control. Always exclude database files (for example, `*.db`, `*.sqlite`, and `*.sqlite3`) and session/conversation files (for example, `session.json` and `sessions/`), along with `.env`, credentials/auth files, memory stores, logs, caches, and generated runtime state. A Git commit is not a substitute for secure secret storage or a backup of live state.
+- Make a personal agent configuration repository private by default. Change its visibility only when the user explicitly directs that repository to be public or otherwise shared; never infer publication intent from a repository name, template, or existing local files.
 
 ## Configuration backup model
 
 1. Name one canonical remote, default branch, and local canonical checkout for each agent configuration repository. Verify the exact remote before making changes; directory names are not evidence of ownership.
-2. Declare the tracked configuration and skill paths, plus ignored secret, chat-specific, and runtime paths. Add explicit ignore rules for database files and session/conversation state; review them before the first push and whenever a new agent feature adds local state.
-3. Treat direct edits in a live agent home as drift unless that home itself is the canonical checkout. Make durable configuration and skill changes in the owning repository, then synchronize the live installation deliberately.
-4. Before activating or synchronizing a repository with a live agent home, compare it with the live home and use a dry-run preview. Do not overwrite local state without explicit authorization.
-5. Validate the candidate configuration with the agent's own configuration checker using the repository as its home, when available. Restart or open a new agent session when configuration or skills are not dynamically reloaded.
+2. Verify the remote visibility before the first push and after any ownership transfer. Personal agent configuration repositories must be private unless the user has explicitly directed otherwise.
+3. Declare the tracked configuration and skill paths, plus ignored secret, chat-specific, and runtime paths. Add explicit ignore rules for database files and session/conversation state; review them before the first push and whenever a new agent feature adds local state.
+4. Treat direct edits in a live agent home as drift unless that home itself is the canonical checkout. Make durable configuration and skill changes in the owning repository, then synchronize the live installation deliberately.
+5. Before activating or synchronizing a repository with a live agent home, compare it with the live home and use a dry-run preview. Do not overwrite local state without explicit authorization.
+6. Validate the candidate configuration with the agent's own configuration checker using the repository as its home, when available. Restart or open a new agent session when configuration or skills are not dynamically reloaded.
 
 ## Skills and shared repositories
 
