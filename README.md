@@ -7,6 +7,7 @@ It does not manage, mirror, or back up the agent application's source code. Appl
 ## Contents
 
 - `skills/autonomous-ai-agents/agent-repository-management/` — establish and operate a repository as the canonical, auditable backup of agent configuration and skills.
+- `skills/autonomous-ai-agents/hermes-plugin-management/` — own durable native Hermes plugins in dedicated repositories and consume verified revisions as configuration submodules.
 
 ## Consumer contract
 
