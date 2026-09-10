@@ -17,6 +17,10 @@ Use this skill when creating, migrating, updating, or delivering a durable plugi
 
 This is a cross-agent ownership and delivery skill. Before changing plugin files, load the target agent's plugin-development documentation or skill for its manifest, discovery path, enablement, reload, and runtime-verification contract.
 
+## Routing guard
+
+A defined plugin or extension task in a known repository or workspace that changes plugin source, manifests, configuration, hooks, or skills and carries acceptance criteria must route to Claude Code through `claude-task-routing`; do not self-execute the delivery merely because the expected diff is short. Preserve direct execution only for a single safe action or a short factual answer.
+
 ## Principle
 
 Each durable agent plugin owns its source, history, tests, releases, and documentation in a dedicated Git repository. An operator's agent-configuration repository consumes a reviewed, pinned plugin revision as a dependency—typically a Git submodule—rather than vendoring plugin source.
