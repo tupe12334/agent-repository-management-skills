@@ -40,6 +40,9 @@ This repository type backs up the agent's configuration, not the agent applicati
 3. Deliver changes in dependency order: validate and merge the skill-library change first, then update and deliver each consumer repository's gitlink. Verify both remote commits.
 4. Preserve pre-existing dirty submodules and unrelated parent changes. Do not reset, clean, force-push, or bypass hooks to make a submodule update convenient.
 5. Verify the agent's skill discovery layout after updating the gitlink. A submodule being cloned is not proof that the runtime can discover its skills.
+6. Inspect the gitlink itself, not `git diff` or `git status`. A submodule declared with `ignore = all` hides gitlink changes from both, so a correct bump looks like an empty commit. Compare `git ls-tree origin/<branch> <path>` with `git ls-tree HEAD <path>`.
+7. When the library nests its categories as their own submodules, initialize them in the live agent home (`git -C <library> submodule update --init <category>`). An uninitialized category is an empty directory, and every skill in it is invisible to the runtime, even though the parent gitlink is current.
+8. This consumer bump is the last step of a skill-library change, not a separate task. Run it whenever `skill-library-curation` merges a library change.
 
 ## Change delivery
 
