@@ -1,7 +1,7 @@
 ---
 name: agent-plugin-management
 description: "Use when managing durable agent plugins or extensions as Git repositories and pinned dependencies."
-version: 1.0.0
+version: 1.1.0
 author: Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -35,7 +35,7 @@ Each durable agent plugin owns its source, history, tests, releases, and documen
 
 ## Delivery workflow
 
-1. Discover the target agent's authoritative plugin contract: manifest shape, install/discovery path, enablement, reload behavior, and focused runtime check. Do not import a different agent's assumptions.
+1. Discover the target agent's authoritative plugin contract: manifest shape, install/discovery path, enablement, reload behavior, and focused runtime check. Do not import a different agent's assumptions. When one hook binary ships as a plugin for several agents, follow `references/multi-agent-hook-plugins.md` for per-agent contracts, layout collisions, isolated verification and switching a live configuration.
 2. Inventory requested plugin paths before mutating them: parent index entries, ignore coverage, child `.git` metadata, remote URL, intended branch, cleanliness, and `HEAD...origin/<branch>` ancestry.
 3. For an in-tree plugin without a dedicated repository, create or verify its intended remote, initialize the plugin repository, add a narrow ignore file for generated artifacts, commit the current source, push a feature branch, open and merge a PR, then verify the merged remote branch SHA.
 4. For an existing child checkout, preserve a clean unmerged feature branch by pushing it before checking out the intended remote branch. Never discard a child commit merely to make a parent dependency reference appear current.
